@@ -19,7 +19,10 @@ class DirScanWorker(RabbitMQConsumer):
 
     def task_handle(self):
         task = json.loads(self.message)
-        ffuf.run(task["url"], task["dir_file"])
+        url = task['url']
+        dir_file = task['dir_file']
+        task_id = task['task_id']
+        ffuf.run(url, dir_file, task_id)
 
 if __name__ == '__main__':
     # 启动子域名扫描服务

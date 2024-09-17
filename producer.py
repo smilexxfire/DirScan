@@ -9,6 +9,7 @@
 @Comment ： 
 '''
 import json
+import uuid
 
 from common.database.producer import RabbitMQProducer
 from config.settings import RABBITMQ_QUEUE_NAME
@@ -30,6 +31,11 @@ def send_task(task):
 if __name__ == '__main__':
     task = {
         "url": "http://qiniu.xxf.world",
-        "dir_file": "dicc.txt"
+        "dir_file": "dicc.txt",
+        "task_id": str(uuid.uuid4()),
     }
     send_task(task)
+    # task["dir_file"] = "备份.txt"
+    # send_task(task)
+    # task["dir_file"] = "综合高危.txt"
+    # send_task(task)

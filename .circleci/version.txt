@@ -1,1 +1,1 @@
-smilexxfire/dirscan:1.0
+smilexxfire/dirscan:1.1

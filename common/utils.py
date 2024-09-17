@@ -1,7 +1,7 @@
-
 import configparser
 import os
 import socket
+import requests
 
 def get_hostname():
     try:
@@ -10,6 +10,15 @@ def get_hostname():
     except socket.error as err:
         print(f"Unable to get hostname: {err}")
         return None
+
+def get_external_ip():
+    try:
+        response = requests.get('https://httpbin.org/ip')
+        response.raise_for_status()  # 检查请求是否成功
+        ip = response.json()['origin']
+        return ip
+    except requests.RequestException as e:
+        print(f"An error occurred: {e}")
 
 def read_ini_config(section_name, key_name, file_name=os.path.dirname(os.path.abspath(__file__)) + "/../config/default.ini"):
     # 先从环境变量获取
